@@ -46,6 +46,17 @@ var TasksComponent = (function () {
             }
         });
     };
+    TasksComponent.prototype.updateStatus = function (task) {
+        var _task = {
+            _id: task._id,
+            title: task.title,
+            isDone: !task.isDone
+        };
+        this.taskService.updateStatus(_task)
+            .subscribe(function (data) {
+            task.isDone = !task.isDone;
+        });
+    };
     return TasksComponent;
 }());
 TasksComponent = __decorate([

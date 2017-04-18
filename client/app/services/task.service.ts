@@ -15,7 +15,6 @@ export class TaskService {
 	}
 
 	addTask(newTask) {
-		console.log(newTask);
 		var headers = new Headers();
 		headers.append('Content-Type', 'application/json');
 		return this.http.post('http://localhost:3000/api/task', JSON.stringify(newTask), {headers: headers})
@@ -24,6 +23,13 @@ export class TaskService {
 
 	deleteTask(id) {
 		return this.http.delete('http://localhost:3000/api/task/' + id)
+			.map(res => res.json());
+	}
+
+	updateStatus(task) {
+		var headers = new Headers();
+		headers.append('Content-Type', 'application/json');
+		return this.http.put('http://localhost:3000/api/task/' + task._id, JSON.stringify(task), {headers: headers})
 			.map(res => res.json());
 	}
 }
